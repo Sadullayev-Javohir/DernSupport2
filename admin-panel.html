@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kompyuter Ta'mirlash Foydalanauvchi paneli Paneli</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <link rel="stylesheet" href="./admin-panel.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1>Kompyuter Ta'mirlash</h1>
+        <p>Foydalanuvchi Paneli</p>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="menu-item active" onclick="showPage('dashboard')">
+          <i>📊</i>
+          <span>Boshqaruv Paneli</span>
+        </div>
+        <div class="menu-item" onclick="showPage('orders')">
+          <i>🔧</i>
+          <span>Mening Buyurtmalarim</span>
+        </div>
+        <div class="menu-item" onclick="showPage('clients')">
+          <i>👥</i>
+          <span>Mening Profilim</span>
+        </div>
+        <div class="menu-item" onclick="showPage('inventory')">
+          <i>💻</i>
+          <span>Mening Qurilmalarim</span>
+        </div>
+        <div class="menu-item" onclick="showPage('technicians')">
+          <i>👨‍🔧</i>
+          <span>Texnik Ma'lumotlar</span>
+        </div>
+        <div class="menu-item" onclick="showPage('reports')">
+          <i>📈</i>
+          <span>Buyurtma Tarixi</span>
+        </div>
+        <div class="menu-item" onclick="showPage('settings')">
+          <i>⚙️</i>
+          <span>Shaxsiy Sozlamalar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="header">
+        <div class="search-bar">
+          <i>🔍</i>
+          <input type="text" placeholder="Qidirish...">
+        </div>
+
+        <div class="user-profile">
+          <div>
+            <p>Salom, Foydalanuvchi</p>
+          </div>
+          <span>👤</span>
+        </div>
+      </div>
+
+      <!-- Dashboard Section -->
+      <div id="dashboard-page">
+        <h2>Foydalanuvchi Paneli
+        </h2>
+
+        <div class="dashboard">
+          <div class="stat-card">
+            <h3>Mening Umumiy Buyurtmalarim</h3>
+            <p>5</p>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 75%; background-color: var(--primary);"></div>
+            </div>
+            <small>Bu oyda: +1 ta yangi buyurtma</small>
+          </div>
+
+          <div class="stat-card">
+            <h3>Faol Buyurtmalarim</h3>
+            <p>1</p>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 60%; background-color: var(--warning);"></div>
+            </div>
+            <small>Bu hafta: +12%</small>
+          </div>
+
+          <div class="stat-card">
+            <h3>Bajarilgan Buyurtmalar</h3>
+            <p>3</p>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 85%; background-color: var(--success);"></div>
+            </div>
+            <small>Bu oy: +36%</small>
+          </div>
+
+          <div class="stat-card">
+            <h3>To‘langan Umumiy Narx</h3>
+            <p>42,500 so'm</p>
+            <div class="progress-container">
+              <div class="progress-bar" style="width: 65%; background-color: var(--danger);"></div>
+            </div>
+            <small>Bu oyda: +2 ta yakunlandi</small>
+          </div>
+        </div>
+
+        <div class="charts-container">
+          <div class="chart-card">
+            <h3>Oylik Buyurtmalar</h3>
+            <canvas id="orders-chart"></canvas>
+          </div>
+
+          <div class="chart-card">
+            <h3>Muammolar Turi</h3>
+            <canvas id="problems-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="orders-list">
+          <h3>So'nggi Buyurtmalarim</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Qurilma</th>
+                <th>Muammo</th>
+                <th>Sana</th>
+                <th>Holati</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1287</td>
+                <td>Lenovo ThinkPad X1</td>
+                <td>Ekran ko‘rinmayapti</td>
+                <td>15/05/2025</td>
+                <td><span class="status status-in-progress">Jarayonda</span></td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1286</td>
+                <td>MacBook Pro M2</td>
+                <td>Klaviatura ishlamayapti</td>
+                <td>14/05/2025</td>
+                <td><span class="status status-pending">Kutilmoqda</span></td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1285</td>
+                <td>Dell XPS 15</td>
+                <td>Windows o'rnatish</td>
+                <td>12/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1284</td>
+                <td>HP Pavilion</td>
+                <td>Ekran buzilgan</td>
+                <td>11/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1283</td>
+                <td>Acer Aspire</td>
+                <td>Virus tozalash</td>
+                <td>10/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <div class="page-btn">«</div>
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">3</div>
+            <div class="page-btn">»</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div id="orders-page" style="display: none;">
+        <div class="header">
+          <h2>Ta'mirlash Buyurtmalari</h2>
+          <button class="btn btn-primary" onclick="showOrderForm()">+ Yangi Buyurtma</button>
+        </div>
+
+        <div class="form-section" id="order-form">
+          <h3>Yangi Buyurtma Qo'shish</h3>
+
+          <form id="newOrderForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="clientName">Mijoz</label>
+                <select class="form-control" id="clientName">
+                  <option value="">Mijozni tanlang</option>
+                  <option value="1">Aziz Karimov</option>
+                  <option value="2">Nodira Saidova</option>
+                  <option value="3">Jasur Rahimov</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="deviceType">Qurilma Turi</label>
+                <select class="form-control" id="deviceType">
+                  <option value="">Qurilma turini tanlang</option>
+                  <option value="laptop">Noutbuk</option>
+                  <option value="desktop">Desktop</option>
+                  <option value="tablet">Planshet</option>
+                  <option value="printer">Printer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="deviceModel">Qurilma Modeli</label>
+                <input type="text" class="form-control" id="deviceModel" placeholder="Misol: Lenovo ThinkPad X1">
+              </div>
+
+              <div class="form-group">
+                <label for="serialNumber">Seriya Raqami</label>
+                <input type="text" class="form-control" id="serialNumber" placeholder="Misol: AB123456CD">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="problemDescription">Muammo Ta'rifi</label>
+              <textarea class="form-control" id="problemDescription" rows="4"
+                placeholder="Muammoni batafsil tasvirlang..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="technicianAssigned">Texnik</label>
+                <select class="form-control" id="technicianAssigned">
+                  <option value="">Texnikni tanlang</option>
+                  <option value="1">Bobur Alimov</option>
+                  <option value="2">Lola Karimova</option>
+                  <option value="3">Akmal Berdiyev</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="priority">Muhimlik</label>
+                <select class="form-control" id="priority">
+                  <option value="low">Past</option>
+                  <option value="medium" selected>O'rta</option>
+                  <option value="high">Yuqori</option>
+                  <option value="urgent">Juda Muhim</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="estimatedCost">Taxminiy Narx (so'm)</label>
+                <input type="number" class="form-control" id="estimatedCost" placeholder="0">
+              </div>
+
+              <div class="form-group">
+                <label for="estimatedCompletionDate">Taxminiy Tugash Sanasi</label>
+                <input type="date" class="form-control" id="estimatedCompletionDate">
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary">Saqlash</button>
+              <button type="button" class="btn btn-secondary" onclick="hideOrderForm()">Bekor Qilish</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="orders-list">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Mijoz</th>
+                <th>Qurilma</th>
+                <th>Muammo</th>
+                <th>Sana</th>
+                <th>Status</th>
+                <th>Texnik</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1287</td>
+                <td>Aziz Karimov</td>
+                <td>Lenovo ThinkPad X1</td>
+                <td>Qizib ketish</td>
+                <td>15/05/2025</td>
+                <td><span class="status status-in-progress">Jarayonda</span></td>
+                <td>Bobur Alimov</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1286</td>
+                <td>Nodira Saidova</td>
+                <td>MacBook Pro M2</td>
+                <td>Klaviatura ishlamayapti</td>
+                <td>14/05/2025</td>
+                <td><span class="status status-pending">Kutilmoqda</span></td>
+                <td>Lola Karimova</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1285</td>
+                <td>Jasur Rahimov</td>
+                <td>Dell XPS 15</td>
+                <td>Windows o'rnatish</td>
+                <td>12/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Akmal Berdiyev</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1284</td>
+                <td>Sabina Aliyeva</td>
+                <td>HP Pavilion</td>
+                <td>Ekran buzilgan</td>
+                <td>11/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Bobur Alimov</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1283</td>
+                <td>Faruh Sodiqov</td>
+                <td>Acer Aspire</td>
+                <td>Virus tozalash</td>
+                <td>10/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Lola Karimova</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1282</td>
+                <td>Kamola Usmanova</td>
+                <td>ASUS ZenBook</td>
+                <td>Batareya muammosi</td>
+                <td>08/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Akmal Berdiyev</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1281</td>
+                <td>Eldor Muminov</td>
+                <td>MSI Gaming Laptop</td>
+                <td>Operativ xotira muammosi</td>
+                <td>07/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Bobur Alimov</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#1280</td>
+                <td>Malika Hamidova</td>
+                <td>iMac 24"</td>
+                <td>macOS qayta o'rnatish</td>
+                <td>06/05/2025</td>
+                <td><span class="status status-completed">Bajarildi</span></td>
+                <td>Lola Karimova</td>
+                <td>
+                  <button class="action-btn">Ko'rish</button>
+                  <button class="action-btn">Tahrirlash</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <div class="page-btn">«</div>
+            <div class="page-btn active">1</div>
+            <div class="page-btn">2</div>
+            <div class="page-btn">3</div>
+            <div class="page-btn">»</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inventory Section -->
+      <div id="inventory-page" style="display: none;">
+        <div class="header">
+          <h2>Inventar</h2>
+          <button class="btn btn-primary">+ Yangi Qo'shish</button>
+        </div>
+
+        <div class="inventory-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nomi</th>
+                <th>Kategoriya</th>
+                <th>Miqdori</th>
+                <th>Narxi</th>
+                <th>Ta'minlovchi</th>
+                <th>Status</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#P001</td>
+                <td>SSD 500GB Samsung 970 EVO</td>
+                <td>Xotira</td>
+                <td>12</td>
+                <td>950,000 so'm</td>
+                <td>ABC Electronics</td>
+                <td><span class="status status-in-progress">Mavjud</span></td>
+                <td>
+                  <button class="action-btn">Tahrirlash</button>
+                  <button class="action-btn">O'chirish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#P002</td>
+                <td>RAM 16GB DDR4 Crucial</td>
+                <td>Xotira</td>
+                <td>8</td>
+                <td>480,000 so'm</td>
+                <td>Tech Import</td>
+                <td><span class="status status-in-progress">Mavjud</span></td>
+                <td>
+                  <button class="action-btn">Tahrirlash</button>
+                  <button class="action-btn">O'chirish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#P003</td>
+                <td>Nvidia GeForce GTX 1660</td>
+                <td>Video karta</td>
+                <td>3</td>
+                <td>2,500,000 so'm</td>
+                <td>ABC Electronics</td>
+                <td><span class="status status-in-progress">Mavjud</span></td>
+                <td>
+                  <button class="action-btn">Tahrirlash</button>
+                  <button class="action-btn">O'chirish</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#P004</td>
+                <td>CPU Intel i5-11600K</td>
+                <td>Protsessor</td>
+                <td>2</td>
+                <td>3,200,000 so'm</td>
+                <td>IT Solutions</td>
+                <td><span class="status status-in-progress">Mavjud</span

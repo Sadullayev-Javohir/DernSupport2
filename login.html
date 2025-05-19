@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dern Support Login</title>
+  <!-- google fonts link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <!-- css link -->
+  <link rel="stylesheet" href="./login.css">
+  <!-- favicon link -->
+  <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+</head>
+
+
+<body>
+  
+  <form action="#" id="loginForm">
+    <div class="form-left">
+      <img src="assets/img/login.jpg" title="form-left-img" alt="form-left-img">
+    </div>
+    <div class="form-right">
+      <div class="form-right-text">
+        <h6>Qaytib kelganingizdan xursandmiz</h6>
+        <h1>Hisobingizga kiring</h1>
+      </div>
+      <label for="email">
+        <h5>Email</h5>
+        <input id = "email" name="email" type="email" required placeholder="John.snow@gmail.com">
+        <span></span>
+      </label>
+      <label for="password">
+        <h5>Parol</h5>
+        <input id = "password" name="password" type="password" required placeholder="********">
+        <span></span>
+      </label>
+      <div class="form-right-flex">
+        <div class="remember-me">
+          <input type="radio" required title="Eslab qol">
+          <h6>Eslab qol</h6>
+        </div>
+        <div class="forgot-pas">
+          <h6 title="Parolni unutdingizmi?">Parolni unutdingizmi?</h6>
+        </div>
+      </div>
+      <div class="form-button">
+        <button type="submit" title="Hozir kirish">Hozir kirish</button>
+        <a href="signup.html" title="Hisob yo'qmi ?">
+          Hisob yo'qmi ?
+        </a>
+      </div>
+      <div class="dont-account">
+        <a href="./index.html" title="Bosh sahifa">Bosh sahifa</a>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.message === "Muvaffaqiyatli kirdingiz!") {
+          window.location.href = '/admin-panel.html'; // sahifani o'zgartirish
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error('Xatolik:', error);
+        alert('Kirishda xatolik yuz berdi');
+      }
+    });
+  </script>
+  
+  
+</body>
+
+</html>

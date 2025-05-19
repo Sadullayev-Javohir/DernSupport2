@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dern Support Signup</title>
+  <!-- google fonts link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <!-- css link -->
+  <link rel="stylesheet" href="./signup.css">
+  <!-- favicon link -->
+  <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+  
+</head>
+
+<body>
+
+  <form action="#" id="registerForm">
+    <div class="form-left">
+      <img src="assets/img/signup.jpg" title="form-left-img" alt="form-left-img">
+    </div>
+    <div class="form-right">
+      <div class="form-right-text">
+        <h1>Hisob yarating</h1>
+      </div>
+      <label for="FirstName">
+        <h5>Ism</h5>
+        <input name="FirstName" type="text" required>
+        <span></span>
+      </label>
+      <label for="LastName">
+        <h5>Familya</h5>
+        <input name="LastName" type="text" required>
+        <span></span>
+      </label>
+      <label for="email">
+        <h5>Email</h5>
+        <input name="email" type="email" required placeholder="John.snow@gmail.com">
+        <span></span>
+      </label>
+      <label for="password">
+        <h5>Parol</h5>
+        <input name="password" type="password" required placeholder="********">
+        <span></span>
+      </label>
+      <div class="form-right-flex">
+        <div class="remember-me">
+          <input type="radio" required title="Eslab qol">
+          <h6>Eslab qol</h6>
+        </div>
+
+      </div>
+      <div class="form-button">
+        <button type="submit" title="Ro'yxatdan o'tish">Ro'yxatdan o'tish</button>
+        <a href="./login.html" type="submit" title="Hisob bormi">
+          Hisob bormi
+        </a>
+      </div>
+      <div class="dont-account">
+        <a href="./index.html" title="Bosh sahifa">Bosh sahifa</a>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('registerForm');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const firstName = form.FirstName.value.trim();
+      const lastName = form.LastName.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+
+      if (firstName && lastName && email && password) {
+        const user = {
+          fullName: firstName + ' ' + lastName,
+          email: email,
+          password: password
+        };
+
+        try {
+          const response = await fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+          });
+
+          const result = await response.json();
+          alert(result.message);
+          if (response.ok) {
+            window.location.href = "login.html";
+          }
+        } catch (error) {
+          alert("Xatolik yuz berdi: " + error.message);
+        }
+      } else {
+        alert("Iltimos, barcha maydonlarni to'ldiring!");
+      }
+    });
+  </script>
+  
+</body>
+
+</html>
