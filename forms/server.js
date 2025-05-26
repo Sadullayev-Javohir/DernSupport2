@@ -11,20 +11,24 @@ const port = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Frontend fayllar uchun statik yo‘l (public papka)
-app.use(express.static(path.join(__dirname, '..')));
+
+// Frontend fayllar uchun statik yo'l (public papka)
+app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use('/forms', express.static(path.join(__dirname, '../forms')));
+// ...existing code...
 
 // JSON faylga foydalanuvchilarni yozish/oqish uchun
-const usersFilePath = path.join(__dirname, 'users.json');
+const usersFilePath = path.join(__dirname, './users.json');
 
 // Signup sahifasi
 app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'signup.html'));
+  res.sendFile(path.join(__dirname, '../frontend/signup.html'));
 });
 
 // Login sahifasi
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'login.html'));
+  res.sendFile(path.join(__dirname, '../frontend/login.html'));
 });
 
 // POST /register – Ro‘yxatdan o‘tish
