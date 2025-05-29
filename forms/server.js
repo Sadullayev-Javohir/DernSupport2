@@ -1,24 +1,20 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-
-// Frontend fayllar uchun statik yo'l (public papka)
+// Static fayllar
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 app.use('/forms', express.static(path.join(__dirname, '../forms')));
-// ...existing code...
 
-// JSON faylga foydalanuvchilarni yozish/oqish uchun
 const usersFilePath = path.join(__dirname, './users.json');
 
 // Signup sahifasi
@@ -31,7 +27,7 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/login.html'));
 });
 
-// POST /register – Ro‘yxatdan o‘tish
+// Ro'yxatdan o'tish
 app.post('/register', (req, res) => {
   const { fullName, email, password } = req.body;
 
@@ -55,7 +51,7 @@ app.post('/register', (req, res) => {
   res.status(201).json({ message: "Muvaffaqiyatli ro'yxatdan o'tdingiz!" });
 });
 
-// POST /login – Tizimga kirish
+// Tizimga kirish
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
